@@ -1,7 +1,5 @@
-using HouseRentingSystem2._0.Data;
+
 using HouseRentingSystem2._0.Extensions;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
