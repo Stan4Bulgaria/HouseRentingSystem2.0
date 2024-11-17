@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HouseRentingSystem2.0\HouseRentingSystem2.0.csproj" />
+    <ProjectReference Include="..\HouseRentingSystem.Infrastructure\HouseRentingSystem2.0.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

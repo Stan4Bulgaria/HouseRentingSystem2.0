@@ -1,4 +1,6 @@
-﻿using HouseRentingSystem2._0.Models;
+﻿using HouseRentingSystem2._0.Core.Models.Home;
+using HouseRentingSystem2._0.Models;
+using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,15 +15,13 @@ namespace HouseRentingSystem2._0.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = new IndexViewModel();
+
+            return View(model);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
