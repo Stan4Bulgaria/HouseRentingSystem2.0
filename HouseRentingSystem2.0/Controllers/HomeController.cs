@@ -9,16 +9,17 @@ namespace HouseRentingSystem2._0.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IConfiguration _configuration;
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
         {
             var model = new IndexViewModel();
-
+            ViewBag.Message = _configuration.GetValue<string>("EnvMessage");
             return View(model);
         }
 
@@ -28,5 +29,6 @@ namespace HouseRentingSystem2._0.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
     }
 }
