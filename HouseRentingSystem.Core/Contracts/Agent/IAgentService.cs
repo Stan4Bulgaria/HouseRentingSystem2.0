@@ -8,6 +8,9 @@ namespace HouseRentingSystem2._0.Core.Contracts.Agent
 {
     public interface IAgentService
     {
-        Task<bool> ExistsById(string userId);
+        Task<bool> ExistsByIdAsync(string userId);
+        Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber);
+        Task<bool> UserHasRentsAsync(string userId);
+        Task CreateAsync(string userId, string phoneNumber);
     }
 }

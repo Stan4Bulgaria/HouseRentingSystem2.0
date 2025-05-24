@@ -11,6 +11,6 @@ namespace HouseRentingSystem2._0.Core.Contracts.House
 
     public interface IHouseService
     {
-        Task<IEnumerable<HouseIndexServiceModel>> LastThreeHouses();
+        Task<IEnumerable<HouseIndexServiceModel>> LastThreeHousesAsync();
     }
 }

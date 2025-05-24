@@ -1,8 +1,10 @@
 ﻿using HouseRentingSystem2._0.Core.Contracts.Agent;
 using HouseRentingSystem2._0.Core.Contracts.House;
 using HouseRentingSystem2._0.Core.Models.Agent;
+using HouseRentingSystem2._0.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace HouseRentingSystem2._0.Controllers
 {
@@ -27,7 +29,12 @@ namespace HouseRentingSystem2._0.Controllers
         [HttpGet]
         public async  Task<IActionResult> Become()
         {
-            string userId = User.Identity.Name;
+            //string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (await agentService.ExistsByIdAsync(User.Id()))
+            {
+                return BadRequest();
+            };
             
             var model = new BecomeAgentFormModel();
             return View(model);

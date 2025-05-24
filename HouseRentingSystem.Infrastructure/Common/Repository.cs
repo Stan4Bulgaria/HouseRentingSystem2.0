@@ -28,5 +28,7 @@ namespace HouseRentingSystem2._0.Infrastructure.Common
         {
             return DbSet<T>().AsNoTracking();
         }
+
+        
     }
 }

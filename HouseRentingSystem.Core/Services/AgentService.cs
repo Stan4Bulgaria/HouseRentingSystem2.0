@@ -12,10 +12,42 @@ namespace Services
         {
             repository = _repository;
         }
-
-        public async Task<bool> ExistsById(string userId)
+        public async Task<bool> ExistsByIdAsync(string userId)
         {
-            var result = await repository.AllReadOnly<Agent>().AnyAsync(x => x.UserId == userId);
+            var result = await repository
+                .AllReadOnly<Agent>()
+                .AnyAsync(x => x.UserId == userId);
+
+            return result;
+        }
+        public async Task CreateAsync(string userId, string phoneNumber)
+        {
+            var agent  = new Agent
+            {
+                UserId = userId,
+                PhoneNumber = phoneNumber
+            };
+
+            var agents = await repository.All<Agent>().ToListAsync();
+            agents.Add(agent);
+           ;
+        }
+
+        public async Task<bool> UserHasRentsAsync(string userId)
+        {
+            var result = await repository
+                .AllReadOnly<House>()
+                .AnyAsync(h => h.RenterId == userId);
+
+            return result;
+
+        }
+
+        public async Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
+        {
+            var result = await repository
+                .AllReadOnly<Agent>()
+                .AnyAsync(x => x.PhoneNumber == phoneNumber);
 
             return result;
         }
