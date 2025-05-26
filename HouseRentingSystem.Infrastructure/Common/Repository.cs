@@ -13,22 +13,30 @@ namespace HouseRentingSystem2._0.Infrastructure.Common
         private readonly DbContext context;
         public Repository(HouseRentingSystemDbContext _context)
         {
-           context = _context;
+            context = _context;
         }
         private DbSet<T> DbSet<T>() where T : class
         {
-            return  context.Set<T>();
+            return context.Set<T>();
         }
-        IQueryable<T> IRepository.All<T>()  where T: class
+        public IQueryable<T> All<T>() where T : class
         {
-            return DbSet<T>().AsQueryable();  
+            return DbSet<T>().AsQueryable();
         }
 
-        IQueryable<T> IRepository.AllReadOnly<T>() where T : class
+        public IQueryable<T> AllReadOnly<T>() where T : class
         {
             return DbSet<T>().AsNoTracking();
         }
 
-        
+        public async Task AddAsync<T>(T entity) where T : class
+        {
+            await DbSet<T>().AddAsync(entity);
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+           return await context.SaveChangesAsync();
+        }
     }
 }
