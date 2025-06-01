@@ -22,15 +22,15 @@ namespace Services
         }
         public async Task CreateAsync(string userId, string phoneNumber)
         {
-            var agent  = new Agent
+            var agent = new Agent
             {
                 UserId = userId,
                 PhoneNumber = phoneNumber
             };
+            await repository.AddAsync(agent);
+            await repository.SaveChangesAsync();
 
-            var agents = await repository.All<Agent>().ToListAsync();
-            agents.Add(agent);
-           ;
+            ;
         }
 
         public async Task<bool> UserHasRentsAsync(string userId)
