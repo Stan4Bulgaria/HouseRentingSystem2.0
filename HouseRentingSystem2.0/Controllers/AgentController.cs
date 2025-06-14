@@ -1,4 +1,6 @@
-﻿using HouseRentingSystem2._0.Core.Contracts.Agent;
+﻿using HouseRentingSystem2._0.Attributes;
+using static  HouseRentingSystem2._0.Core.Constants.MessageConstants;
+using HouseRentingSystem2._0.Core.Contracts.Agent;
 using HouseRentingSystem2._0.Core.Contracts.House;
 using HouseRentingSystem2._0.Core.Models.Agent;
 using HouseRentingSystem2._0.Extensions;
@@ -27,22 +29,31 @@ namespace HouseRentingSystem2._0.Controllers
             agentService = _agentService;
         }
         [HttpGet]
-        public async  Task<IActionResult> Become()
+        [NotAnAgent]
+        public IActionResult Become()
         {
-            //string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if (await agentService.ExistsByIdAsync(User.Id()))
-            {
-                return BadRequest();
-            };
-            
             var model = new BecomeAgentFormModel();
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Become(BecomeAgentFormModel agent)
+        [NotAnAgent]
+        public async Task<IActionResult> Become(BecomeAgentFormModel model)
         {
-            return RedirectToAction(nameof(HouseController.All), "Houses");
+            if(await agentService.UserWithPhoneNumberExistsAsync(model.PhoneNumber) == true)
+            {
+                ModelState.AddModelError(nameof(model.PhoneNumber), PhoneNumberAlReadyExists);
+            }
+            if(await agentService.UserHasRentsAsync(User.Id()))
+            {
+                ModelState.AddModelError("Error", UserIsRenting);
+            }
+            if(ModelState.IsValid == false)
+            {
+                return View(model);
+            }
+            await agentService.CreateAsync(User.Id(), model.PhoneNumber);
+
+            return RedirectToAction(nameof(HouseController.All), "House");
         }
 
 
