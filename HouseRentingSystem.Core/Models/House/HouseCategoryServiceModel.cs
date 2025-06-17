@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace HouseRentingSystem2._0.Core.Models.House
 {
-    public class AllHousesQueryModel
+    public class HouseCategoryServiceModel
     {
-
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
     }
 }

@@ -28,5 +28,46 @@ namespace Services
                 }).ToListAsync();
 
         }
+        public async Task<IEnumerable<HouseCategoryServiceModel>> AllCategoriesAsync()
+        {
+            return await repository
+                .AllReadOnly<Category>()
+                .Select(c => new HouseCategoryServiceModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
+        }
+
+        public async Task<bool> CategoryExistsAsync(int id)
+        {
+            return await repository
+                .AllReadOnly<Category>()
+                .AnyAsync(c => c.Id == id);
+        }
+
+        public async Task<int> CreateAsync(HouseFormModel model, int? agentId)
+        {
+          
+             
+           await repository.AddAsync(new House()
+           {
+
+               Title = model.Title,
+               Address = model.Address,
+               Description = model.Description,
+               ImageUrl = model.ImageUrl,
+               PricePerMonth = model.PricePerMonth,
+               CategoryId = model.CategoryId,
+               AgentId = (int)agentId
+           });
+
+            return await repository.SaveChangesAsync();
+
+        }
+        //public async Task<IEnumerable<AllHousesQueryModel>> All()
+        //{
+
+        //}
     }
 }

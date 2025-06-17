@@ -12,5 +12,6 @@ namespace HouseRentingSystem2._0.Core.Contracts.Agent
         Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber);
         Task<bool> UserHasRentsAsync(string userId);
         Task CreateAsync(string userId, string phoneNumber);
+        Task<int?> FindAgentByUserId(string userId);
     }
 }

@@ -29,14 +29,14 @@ namespace HouseRentingSystem2._0.Controllers
             agentService = _agentService;
         }
         [HttpGet]
-        [NotAnAgent]
+        [NotAnAgentAttribute]
         public IActionResult Become()
         {
             var model = new BecomeAgentFormModel();
             return View(model);
         }
         [HttpPost]
-        [NotAnAgent]
+        [NotAnAgentAttribute]
         public async Task<IActionResult> Become(BecomeAgentFormModel model)
         {
             if(await agentService.UserWithPhoneNumberExistsAsync(model.PhoneNumber) == true)

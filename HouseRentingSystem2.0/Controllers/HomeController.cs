@@ -1,8 +1,6 @@
 ﻿using HouseRentingSystem2._0.Core.Contracts.House;
-using HouseRentingSystem2._0.Core.Models.Home;
 using HouseRentingSystem2._0.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

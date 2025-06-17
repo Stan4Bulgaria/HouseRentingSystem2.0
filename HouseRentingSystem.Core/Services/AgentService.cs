@@ -51,5 +51,13 @@ namespace Services
 
             return result;
         }
+
+        public async Task<int?> FindAgentByUserId(string userId)
+        {
+            var result = (await repository
+                .AllReadOnly<Agent>()
+                .FirstOrDefaultAsync(a => a.UserId == userId))?.Id;   
+            return result;
+        }
     }
 }

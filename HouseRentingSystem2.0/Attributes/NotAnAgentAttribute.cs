@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace HouseRentingSystem2._0.Attributes
 {
-    public class NotAnAgent:ActionFilterAttribute
+    public class NotAnAgentAttribute:ActionFilterAttribute
     {
       
         public override void OnActionExecuting(ActionExecutingContext context)

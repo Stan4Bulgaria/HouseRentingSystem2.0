@@ -12,5 +12,7 @@ namespace HouseRentingSystem2._0.Core.Constants
         public const string LengthMessage = "The field {0} must be between {2} and {1} characters long";
         public const string PhoneNumberAlReadyExists = "This number is already registerstered Please entert a new one";
         public const string UserIsRenting = "User can't be renting a property";
+        public const string InvalidCategoryId = "Invalid category";
+        
     }
 }
